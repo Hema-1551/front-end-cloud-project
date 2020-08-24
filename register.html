@@ -4,18 +4,39 @@
 <head>
   <meta charset="utf-8">
   <title>Register Form Start</title>
-
-
-  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
-
-
-  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
-
-
-
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script> 
+ 
+ 
+  <script src="/__/firebase/7.14.1/firebase-app.js"></script>
   
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="/__/firebase/7.14.1/firebase-analytics.js"></script>
+   
+   
+   
+  <script>
+    var config = {
+  apiKey: "AIzaSyCEgcDa00GFb24s8G2ZpBQfAXylpP9c_Uo",
+  authDomain: "covid-19-4b5e8.firebaseapp.com",
+  databaseURL: "https://covid-19-4b5e8.firebaseio.com",
+  projectId: "covid-19-4b5e8",
+  storageBucket: "covid-19-4b5e8.appspot.com",
+  messagingSenderId: "613143221483",
+   };
+
+
+   
+   var firebaseConfig = {
+      appId: "1:613143221483:web:deaa27f1e3f6f1b2b3daae",
+      measurementId: "G-4Y3K76K9K9"
+    };
+
+   firebase.initializeApp(config);
+
+
+  </script>
 
 </head>
 
@@ -93,7 +114,7 @@
       <div>
         <label class="label-title">Phone No</label>
         <div>
-          <input type="tel" class="form-input" maxlength="10">
+          <input type="tel" class="form-input" maxlength="10" id="phone">
         </div>
       </div>
 
@@ -130,52 +151,90 @@
     </div>
 
   </form>
-  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-database.js"></script>
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyCEgcDa00GFb24s8G2ZpBQfAXylpP9c_Uo",
-      authDomain: "covid-19-4b5e8.firebaseapp.com",
-      databaseURL: "https://covid-19-4b5e8.firebaseio.com",
-      projectId: "covid-19-4b5e8",
-      storageBucket: "covid-19-4b5e8.appspot.com",
-      messagingSenderId: "613143221483",
-      appId: "1:613143221483:web:deaa27f1e3f6f1b2b3daae",
-      measurementId: "G-4Y3K76K9K9"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-
-
-    function funSub() {
-     
-
-  var firstname= document.getElementById("firstname").value,
-  var lastname=document.getElementById("lastname").value,
-  var email = document.getElementById("email").value,
-  var password= document.getElementById("password").value,
-  var repeat_password= document.getElementById("confirm-password").value,
-  firebase.auth().createUserWithEmailAndPassword(email,password).then(function(){
-    alert('user registered sucessfully');
-    var id=firebase.auth().currrentUser.uid;
-    firebase.database().ref('users/'+id).set({
-      name:firstname,
-      email: email,
-    });
-  }).catch(function(error){
-
-    var errorcode= error.code;
-    var errormsg = error.message;
-
-  });
-  window.location.replace("questionarie.html");
   
+ 
+<script>
+ 
+  var tblUsers = document.getElementById('tbl_users_list');
+  var databaseRef = firebase.database().ref('Reg/');
+  var rowIndex = 1;
+  
+  databaseRef.once('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+   var childKey = childSnapshot.key;
+   var childData = childSnapshot.val();
+   
+   var row = tblUsers.insertRow(rowIndex);
+   var cellId = row.insertCell(0);
+   var cellName = row.insertCell(1);
+   cellId.appendChild(document.createTextNode(childKey));
+   cellName.appendChild(document.createTextNode(childData.user_name));
+   
+   rowIndex = rowIndex + 1;
+    });
+  });
+   
+  function funSub(){
+   var fname = document.getElementById('firstname').value;
+   var lname = document.getElementById('lastname').value;
+   var email = document.getElementById('email').value;
+   var pass = document.getElementById('password').value;
+  //  var gender = document.getElementById('firstname').value;
+   var phone = document.getElementById('phone').value;
 
-}
+  
+   var uid = firebase.database().ref().child('covid-19-4b5e8').push().key;
+   
+   var data = {
+    id: uid,
+    firstname: fname,
+    Surname:lname,
+    email:email,
+    password:pass,
+    phone:phone,
 
+   }
+   
+   var updates = {};
+   updates['/Reg/' + uid] = data;
+   firebase.database().ref().update(updates);
+   
+   alert('The user is created successfully!');
+   reload_page();
+  }
+  
+  function update_user(){
+   var user_name = document.getElementById('user_name').value;
+   var user_id = document.getElementById('user_id').value;
 
-  </script>
+   var data = {
+    id: user_id,
+    name: user_name
+   }
+   
+   var updates = {};
+   updates['/Users/' + user_id] = data;
+   firebase.database().ref().update(updates);
+   
+   alert('The user is updated successfully!');
+   
+   reload_page();
+  }
+  
+  function delete_user(){
+   var user_id = document.getElementById('user_id').value;
+  
+   firebase.database().ref().child('/Users/' + user_id).remove();
+   alert('The user is deleted successfully!');
+   reload_page();
+  }
+  
+  function reload_page(){
+   window.location.reload();
+  }
+  
+ </script>
+ 
  
 </body>
 

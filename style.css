@@ -1,4 +1,4 @@
-@import url('httpss://fonts.googleapis.com/css?family=Roboto');
+/* @import url('httpss://fonts.googleapis.com/css?family=Roboto'); */
 
 body {
   background:linear-gradient(to right, #78a7ba 0%, #385D6C 50%, #78a7ba 99%);
@@ -134,4 +134,28 @@ body {
   .btn:hover {
 	background-color: #169c7b;
 	color:white;
+  }
+
+  .progress{
+    height: 20px;  /* Can be anything */
+	position: relative;
+	background: #169c7b;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	border-radius: 25px;
+	padding: 10px;
+  box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+  margin: 60px;
+  width: 20%;
+  }
+  #bar{
+    height: 20px;
+    background-color: #bcf5e7;
+	border-radius: 25px;
+  -moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+position: relative;
+   
+	-webkit-border-radius: 25px;
+
   }

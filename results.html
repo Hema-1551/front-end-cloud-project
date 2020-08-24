@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Register Form Start</title>
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
+
+
+  <link rel="stylesheet" href="style.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+
+</head>
+
+<body>
+
+  <form class="signup-form" action="/register" method="post">
+
+    <!-- form header -->
+    <div class="form-header">
+      <h1>Create Account</h1>
+    </div>
+
+    <!-- form body -->
+    <div class="form-body">
+
+      <!-- Firstname and Lastname -->
+      <div class="horizontal-group">
+        <div class="form-group left">
+          <label for="firstname" class="label-title">Firstname</label>
+          <input type="text" id="firstname" class="form-input" placeholder="enter your first name"
+            required="required" />
+        </div>
+       
+        <div class="form-group right">
+          <label for="lastname" class="label-title">Surname *</label>
+          <input type="text" id="lastname" class="form-input" placeholder="enter your surname name"
+            required="required" />
+        </div>
+      </div>
+      
+
+<label>Covid level</label>
+      <div class="progress"> 
+        <div id=bar ></div>
+       </div> 
+  
+    <!-- maps for centers -->
+    <div class="form-footer">
+      <button class="btn" onclick="funSub()"><a href="https://www.google.co.in/maps/search/nearest+covid+testing+center/@17.538365,78.4056802,14z">Covid testing centers near me</a></button>
+    </div>
+
+  </form>
+ 
+</body>
+
+
+
+</html>
+

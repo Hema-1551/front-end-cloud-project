@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    //method="post"
-  <form class="signup-form" action="/register" >
+ 
+  <form class="signup-form" >
 
     <!-- form header -->
     <div class="form-header">
@@ -195,10 +195,99 @@
 
       <!-- form footer -->
       <div>
-        <button type="submit" class="btn"><a href="https://www.google.co.in/maps/search/nearest+covid+testing+center/@17.4425491,78.3499334,13z"></a>submit</button>
+        <button type="submit" class="btn">
+          <a href="results.html">
+          submit
+        </a></button>
       </div>
 
   </form>
+
+   
+ 
+<script>
+ 
+  var tblUsers = document.getElementById('tbl_users_list');
+  var databaseRef = firebase.database().ref('Reg/');
+  var rowIndex = 1;
+  
+  databaseRef.once('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+   var childKey = childSnapshot.key;
+   var childData = childSnapshot.val();
+   
+   var row = tblUsers.insertRow(rowIndex);
+   var cellId = row.insertCell(0);
+   var cellName = row.insertCell(1);
+   cellId.appendChild(document.createTextNode(childKey));
+   cellName.appendChild(document.createTextNode(childData.user_name));
+   
+   rowIndex = rowIndex + 1;
+    });
+  });
+   
+  function funSub(){
+   var fname = document.getElementById('firstname').value;
+   var lname = document.getElementById('lastname').value;
+   var email = document.getElementById('email').value;
+   var pass = document.getElementById('password').value;
+  //  var gender = document.getElementById('firstname').value;
+   var phone = document.getElementById('phone').value;
+
+  
+   var uid = firebase.database().ref().child('covid-19-4b5e8').push().key;
+   
+   var data = {
+    id: uid,
+    firstname: fname,
+    Surname:lname,
+    email:email,
+    password:pass,
+    phone:phone,
+
+   }
+   
+   var updates = {};
+   updates['/Reg/' + uid] = data;
+   firebase.database().ref().update(updates);
+   
+   alert('The user is created successfully!');
+   reload_page();
+  }
+  
+  function update_user(){
+   var user_name = document.getElementById('user_name').value;
+   var user_id = document.getElementById('user_id').value;
+
+   var data = {
+    id: user_id,
+    name: user_name
+   }
+   
+   var updates = {};
+   updates['/Users/' + user_id] = data;
+   firebase.database().ref().update(updates);
+   
+   alert('The user is updated successfully!');
+   
+   reload_page();
+  }
+  
+  function delete_user(){
+   var user_id = document.getElementById('user_id').value;
+  
+   firebase.database().ref().child('/Users/' + user_id).remove();
+   alert('The user is deleted successfully!');
+   reload_page();
+  }
+  
+  function reload_page(){
+   window.location.reload();
+  }
+  
+ </script>
+ 
+
 
 </body>
 
