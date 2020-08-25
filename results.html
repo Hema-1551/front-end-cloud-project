@@ -6,10 +6,10 @@
   <title>Register Form Start</title>
 
 
-  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script> -->
 
 
-  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script> -->
 
 
 
@@ -20,12 +20,13 @@
 </head>
 
 <body>
+  <script src="userdata.js"></script>
 
-  <form class="signup-form" action="/register" method="post">
+  <form class="signup-form" >
 
     <!-- form header -->
     <div class="form-header">
-      <h1>Create Account</h1>
+      <h1>Results</h1>
     </div>
 
     <!-- form body -->
@@ -35,29 +36,41 @@
       <div class="horizontal-group">
         <div class="form-group left">
           <label for="firstname" class="label-title">Firstname</label>
-          <input type="text" id="firstname" class="form-input" placeholder="enter your first name"
-            required="required" />
+          <p id="Display_firstname"></p>
+          
         </div>
        
         <div class="form-group right">
           <label for="lastname" class="label-title">Surname *</label>
-          <input type="text" id="lastname" class="form-input" placeholder="enter your surname name"
-            required="required" />
+          <p id="Display_lastname"></p>
+        
         </div>
       </div>
       
 
 <label>Covid level</label>
-      <div class="progress"> 
-        <div id=bar ></div>
-       </div> 
+
+<button type="button" onclick="result(); getDetails();" class="btn"> Get results</button>
+<p id="result"></p>
+
+
   
     <!-- maps for centers -->
     <div class="form-footer">
       <button class="btn" onclick="funSub()"><a href="https://www.google.co.in/maps/search/nearest+covid+testing+center/@17.538365,78.4056802,14z">Covid testing centers near me</a></button>
     </div>
 
+
+    <div>
+      <p>
+        
+Seek immediate medical attention if you have serious symptoms. Always call before visiting your doctor or health facility.
+<p>People with mild symptoms who are otherwise healthy should manage their symptoms at home.</p>
+On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days.
+      </p>
+    </div>
   </form>
+ 
  
 </body>
 
