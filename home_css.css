@@ -9,3 +9,20 @@
     -webkit-border-radius: 25px;
     border-radius: 25px;
 }
+
+.btn {
+    display:inline-block;
+    padding:10px 20px;
+    background-color: #1BBA93;
+    font-size:17px;
+    border:none;
+    border-radius:5px;
+    color:#bcf5e7;
+    cursor:pointer;
+    margin-left: 45%;
+ }
+ 
+ .btn:hover {
+   background-color: #169c7b;
+   color:white;
+ }

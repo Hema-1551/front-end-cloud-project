@@ -188,7 +188,7 @@ function getSymptoms() {
 
     if (shortnessOfBreath || chest_pain || lossOfSpeech) {
         Serious = 1;
-        alert('entred');
+        // alert('entred');
     }
 
     else if (fever_level || cough || tiredness)
@@ -227,7 +227,7 @@ function result() {
     var lessCommon_result=localStorage.getItem("lessCommon_g");
     var serious_result=localStorage.getItem("Serious_g");
 
-    alert(mostCommon_result);
+    // alert(mostCommon_result);
     if (mostCommon) {
         document.getElementById("result").innerHTML = "You have most common symptoms of covid-19\n so, please go for Covid testing";
     }
